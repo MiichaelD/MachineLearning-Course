@@ -13,8 +13,14 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
+% Non-Vectorized (iteratively) solution 
+% for iter = 1:m
+%   J = J + (theta(1) * X(iter, 1) + theta(2) * X(iter, 2) - y(iter,1)) ^ 2;
+% end
+% J = (J / (2 * m)); 
 
-
+% Vectorized solution
+J = sum((X * theta - y) .^ 2) / (2 * m);
 
 
 % =========================================================================
