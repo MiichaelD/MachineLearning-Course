@@ -80,8 +80,12 @@ z3 = a2 * Theta2';
 a3 = sigmoid(z3);
 h = a3;
 
-% Compute cost function
-J = (sum(sum((-Y) .* log(h) - (1-Y) .* log(1 - h), 2)) / m) 
+% Compute penalty
+penalty = (sum(sum(Theta1(:, 2:end) .^ 2, 2))  + sum(sum(Theta2(:,2:end) .^ 2, 2))) ...
+              * lambda / (2 * m);
+
+% Compute regularized cost function
+J = (sum(sum((-Y) .* log(h) - (1-Y) .* log(1 - h), 2)) / m) + penalty;
 
 % -------------------------------------------------------------
 
