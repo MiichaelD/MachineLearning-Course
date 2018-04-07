@@ -16,10 +16,11 @@ function [J grad] = nnCostFunction(nn_params, ...
 
 % Reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices
 % for our 2 layer neural network
-Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
+lastTheta1Element = hidden_layer_size * (input_layer_size + 1);
+Theta1 = reshape(nn_params(1: lastTheta1Element), ...
                  hidden_layer_size, (input_layer_size + 1));
 
-Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
+Theta2 = reshape(nn_params((1 + lastTheta1Element): end), ...
                  num_labels, (hidden_layer_size + 1));
 
 % Setup some useful variables
@@ -62,23 +63,25 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Create Y Matrix from y vector where each row represents the class.
+identity = eye(num_labels);
+Y = zeros(m, num_labels);
+for i = 1:m
+  Y(i, :) = identity(y(i), :);
+end
 
+% Add column of ones to each input row of X.
+a1 = [ones(m, 1) X];
 
+z2 = a1 * Theta1';
+a2 = [ones(size(z2, 1), 1) sigmoid(z2)];
 
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
+h = a3;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+% Compute cost function
+J = (sum(sum((-Y) .* log(h) - (1-Y) .* log(1 - h), 2)) / m) 
 
 % -------------------------------------------------------------
 
