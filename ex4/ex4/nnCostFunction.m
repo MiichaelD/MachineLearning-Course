@@ -63,7 +63,7 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-% Create Y Matrix from y vector where each row represents the class.
+% Create Y Matrix from y vector where each row represents the class (K).
 identity = eye(num_labels);
 Y = zeros(m, num_labels);
 for i = 1:m
@@ -86,6 +86,20 @@ penalty = (sum(sum(Theta1(:, 2:end) .^ 2, 2))  + sum(sum(Theta2(:,2:end) .^ 2, 2
 
 % Compute regularized cost function
 J = (sum(sum((-Y) .* log(h) - (1-Y) .* log(1 - h), 2)) / m) + penalty;
+
+% Backpropagation sigmas
+S3 = a3 - Y;
+S2 = (S3 * Theta2 .* sigmoidGradient([ones(size(z2, 1), 1) z2]));
+S2 = S2(:, 2:end);  % Remove first element of S2
+
+% Deltas
+D1 = S2' * a1;
+D2 = S3' * a2;
+
+% Computing gradients
+% Theta1_grad = (D1 + (lambda * [zeros(size(Theta1, 1), 1) Theta1(:, 2:end)]) / m;
+Theta1_grad = D1 ./ m + (lambda/m) * [zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
+Theta2_grad = D2 ./ m + (lambda/m) * [zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
 
 % -------------------------------------------------------------
 
