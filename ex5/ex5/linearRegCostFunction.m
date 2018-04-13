@@ -22,7 +22,7 @@ grad = zeros(size(theta));
 h = X * theta;
 
 % theta with first element as 0 and rest are same elements
-new_theta = [0; theta(2 : size(theta))];
+new_theta = [0; theta(2:end)];
 
 J = sum((h - y) .^ 2) / (2 * m) + (lambda * new_theta' * new_theta) / (2 * m);
 
