@@ -26,7 +26,7 @@ new_theta = [0; theta(2:end)];
 
 J = sum((h - y) .^ 2) / (2 * m) + (lambda * new_theta' * new_theta) / (2 * m);
 
-grad =  (X' * (h - y) + (lambda * new_theta)) / m;   % size() = 3  1, like theta
+grad = (X' * (h - y) + (lambda * new_theta)) / m;
 
 % =========================================================================
 
