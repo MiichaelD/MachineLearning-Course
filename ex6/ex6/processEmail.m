@@ -98,8 +98,8 @@ while ~isempty(email_contents)
     %
 
     for idx = 1:length(vocabList) % iterate thru vocabulary list 
-      if(strcmp(str, vocabList{idx})) % compare str with each word in vocabLit
-        word_indices = [ word_indices ; idx]; % add it to list of indices
+      if (strcmp(str, vocabList{idx})) % compare str with each word in vocabLit
+        word_indices = [word_indices; idx]; % add it to list of indices
       end
     end
 
