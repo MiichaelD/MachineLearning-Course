@@ -16,10 +16,9 @@ sim = 0;
 %
 %
 
-
-
-
-
+difference = x1 - x2;
+magnitude = difference' * difference;
+sim = exp(-magnitude / (2 * (sigma ^ 2)));
 
 % =============================================================
     
