@@ -27,11 +27,11 @@ sigma = 0.1;
 values = [0.01 0.03 0.1 0.3 1 3 10 30];
 lowest_error = 100000;
 
-fprintf('Looking for optimal C and sigma values\n');
+% fprintf('Looking for optimal C and sigma values\n');
 index = 0;
 for c = values
   for sig = values
-    fprintf('%d. - Trying C = %f and sigma = %f', ++index, c, sig);
+    % fprintf('%d. - Trying C = %f and sigma = %f', ++index, c, sig);
     model = svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, sig));
     error = mean(double(svmPredict(model, Xval) ~= yval));
     if (error <= lowest_error)
@@ -42,7 +42,7 @@ for c = values
     end
   end
 end
-printf("Best C = %f, sigma = %f\n", C, sigma);
+printf('Best C = %f, sigma = %f\n', C, sigma);
 
 % =========================================================================
 
