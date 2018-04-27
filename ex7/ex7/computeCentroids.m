@@ -27,11 +27,10 @@ centroids = zeros(K, n);
 %
 
 
-
-
-
-
-
+for i = 1:K,
+  Xi = X(idx(:,1) == i, :); % All rows with idx i
+  centroids(i, :) = mean(Xi); 
+end
 
 % =============================================================
 
