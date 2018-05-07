@@ -44,7 +44,9 @@ H = X * Theta';
 ERR = R .* (H - Y);
 ERRsq = ERR .^ 2;
 
-J = sum(sum(ERRsq)) / 2;
+% reg = (sum(sum(Theta.^2)) * lambda / 2) + (sum(sum(X.^2)) * lambda / 2);
+reg = (sum(sum(Theta.^2)) + sum(sum(X.^2))) * lambda / 2;
+J = sum(sum(ERRsq)) / 2 + reg;
 
 X_grad = ERR * Theta;
 Theta_grad = ERR' * X;
